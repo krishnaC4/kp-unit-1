@@ -12,9 +12,12 @@
 
 @property NSString* itemName;
 
-@property (readonly)NSDate *creationDate;
-
 @property BOOL completed;
+
+@property (readonly) NSDate *creationDate;
+
+//-(void)markAsCompleted: (BOOL)isComplete;
+
 
 
 @end
