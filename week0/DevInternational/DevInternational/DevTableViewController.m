@@ -7,22 +7,76 @@
 //
 
 #import "DevTableViewController.h"
+#import "DevClassObject.h"
+#import "AddDevViewController.h"
+
 
 @interface DevTableViewController ()
+
+@property NSMutableArray *devCountryNames;
+
 
 @end
 
 @implementation DevTableViewController
 
+
+-(IBAction)unwindToList:(UIStoryboardSegue *)segue {
+    
+    AddDevViewController *source = [segue sourceViewController];
+    DevCountryName *countryName = source.devCountryName;
+    if (countryName != nil) {
+        [self.devCountryNames addObject:countryName];
+        [self.tableView reloadData];
+        
+    }
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.devCountryNames = [[NSMutableArray alloc] init];
+    [self loadInitialData];
+
 }
+
+
+-(void)loadInitialData {
+    DevCountryName *country1 = [[DevCountryName alloc] init];
+    country1.countryName = @"Anguilla";
+    [self.devCountryNames addObject:country1];
+    
+    DevCountryName *country2 = [[DevCountryName alloc] init];
+    country2.countryName = @"Antigua and Barbuda";
+    [self.devCountryNames addObject:country2];
+    
+    
+    DevCountryName *country3 = [[DevCountryName alloc] init];
+    country3.countryName = @"Argentina";
+    [self.devCountryNames  addObject:country3];
+    
+}
+
+    
+//    
+//    Aruba
+//    Bahamas
+//    Barbados
+//    Belize
+//    Bermuda
+//    Bolivia
+//    Bonaire
+//    Bouvet Island
+//    Brazil
+//    Canada
+//    Cayman Islands
+//    Chile
+//    Colombia
+//    Costa Rica
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -34,67 +88,41 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
 
-/*
+    return [self.devCountryNames count];
+    }
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"ListPrototyeCell" forIndexPath:indexPath];
     
     // Configure the cell...
     
+    DevCountryName *devCountryName = [self.devCountryNames objectAtIndex:indexPath.row];
+    cell.textLabel.text = devCountryName.countryName;
+    if (devCountryName.completed){
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+        
+     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+#pragma mark- Table view delegate
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+     DevCountryName *tappedCountryName = [self.devCountryNames objectAtIndex:indexPath.row];
+     tappedCountryName.completed = !tappedCountryName.completed;
+     [tableView reloadRowsAtIndexPaths: @[indexPath] withRowAnimation: UITableViewRowAnimationNone];
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+     }
 @end

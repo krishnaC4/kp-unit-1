@@ -8,6 +8,6 @@
 
 #import "DevClassObject.h"
 
-@implementation DevClassObject
+@implementation DevCountryName
 
 @end
