@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  DevTableViewController.h
 //  DevInternational
 //
 //  Created by MacMan on 7/31/15.
@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface DevTableViewController : UITableViewController
 
 
+-(IBAction)unwindToList: (UIStoryboardSegue *) segue;
 @end
-

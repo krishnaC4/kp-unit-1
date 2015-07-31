@@ -1,18 +1,20 @@
 //
-//  AddToDevListViewController.m
+//  AddDevViewController.m
 //  DevInternational
 //
-//  Created by MacMan on 7/30/15.
+//  Created by MacMan on 7/31/15.
 //  Copyright (c) 2015 MacManApp. All rights reserved.
 //
 
-#import "AddToDevListViewController.h"
+#import "AddDevViewController.h"
 
-@interface AddToDevListViewController ()
+@interface AddDevViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 @end
 
-@implementation AddToDevListViewController
+@implementation AddDevViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,14 +26,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if (sender != self.saveButton) return;
+    if (self.textField.text.length > 0) {
+        self.devCountryName = [[DevCountryName alloc]init];
+        self.devCountryName.countryName = self.textField.text;
+        self.devCountryName.completed = NO;
+    }
+    
+    
+    
+    
+    
 }
-*/
+
 
 @end

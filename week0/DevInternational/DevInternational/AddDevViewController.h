@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  AddDevViewController.h
 //  DevInternational
 //
 //  Created by MacMan on 7/31/15.
@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DevClassObject.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AddDevViewController : UIViewController
 
-@property (strong, nonatomic) UIWindow *window;
-
+@property DevCountryName *devCountryName;
 
 @end
-
